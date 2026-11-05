@@ -1,15 +1,11 @@
-// Exercise 4: Random Line from File
-// Goal: read quotes.txt using a callback, split it into lines, ignore empty lines and print a random one.
-// Required: fs.readFile(filePath, callback)
-//
-// Expected output (random on each run):
-//   Random Line: Stay positive.
-//
-// Run: node ex04.js
-
-const fs = require("fs");
-const path = require("path");
-
-const filePath = path.join(__dirname, "quotes.txt");
-
-// write your code here
+const fs = require('fs');
+const path = require('path');
+const file = path.join(__dirname, 'quotes.txt');
+fs.readFile(file, 'utf8', (err, text) => {
+if (err) return console.error(err.message);
+const lines = text
+.split(/\r?\n/) 
+.filter(line => line.trim() !== '');
+const num=Math.floor(Math.random() * lines.length)
+console.log(`Random Line:${lines[num]}`)
+});
